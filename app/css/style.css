@@ -1,0 +1,32 @@
+body { margin: 0; }
+
+canvas { width: 100%; height: 100%; }
+
+#back {
+	font-family: 'Comic Sans MS';
+	color: white;
+	background-color: black;
+	font-size: 24px;
+	position: absolute;
+	top: 10px;
+	width: 200px;
+	height: 100px;
+	text-align: center;
+	z-index: 100;
+	display: block;
+}
+
+#text {
+	font-family: 'Comic Sans MS';
+	color: white;
+	background-color: black;
+	font-size: 24px;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	z-index: 100;
+	display: block;
+	padding: 40px;
+}
