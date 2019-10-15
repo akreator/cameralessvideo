@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Cameraless Video</title>
+	</head>
+	<body>
+		<script>	
+			function whyYes() {
+				window.open('/why', '_blank', 'height=230,width=300,top=450,left=870');
+			}
+			function whyNo() {
+				window.open('/why', '_blank', 'height=230,width=300,top=390,left=70');
+			}
+		</script>
+		<audio autoplay>
+		  <source src="/imgs/ding.wav" type="audio/wav">
+		  Your browser does not support the audio tag.
+		</audio>
+		<video width="500" height="500" loop autoplay controls>
+		  <source src="/imgs/video.mp4" type="video/mp4">
+		Your browser does not support the video tag.
+		</video autoplay>
+		<form onsubmit="submitVideo()" id="what-is-a-video">
+			<h2 style="background-color:white;">ｗｈａｔ ａｂｏｕｔ ｗｈａｔ＇ｓ ｏｎ ｙｏｕｒ ｓｃｒｅｅｎ？</h2>
+			<input type="button" onclick="whyYes()" value="it's a video">
+			<input type="button" onclick="whyNo()" value="it's not a video">
+		</form>
+	</body>
+</html>

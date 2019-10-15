@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Cameraless Video</title>
+	</head>
+	<body>
+		<script>
+			function submitVideo() {
+				window.open('/camera3', '_blank', 'height=230,width=250,top=100,left=200');	
+			}
+		</script>
+		<audio autoplay>
+		  <source src="/imgs/ding.wav" type="audio/wav">
+		  Your browser does not support the audio tag.
+		</audio>
+		<form onsubmit="submitVideo()" id="what-is-a-video">
+			<img src="https://media1.tenor.com/images/9e4649b2974da1ca2056af7566760217/tenor.gif?itemid=11613683" 
+			style="width:80%;position:absolute;bottom:40px;left:20px;z-index:-99">
+			<h2 style="background-color:white,color:yellow;position:absolute;top:10px;right:10px">𝚠𝚑𝚊𝚝 𝚒𝚜 𝚊 𝚌𝚊𝚖𝚎𝚛𝚊?</h2>
+			<textarea style="width:300;height:150;background-color: #00ffff00;" name="video1" form="what-is-a-video"></textarea>
+			<input type="submit">
+		</form>
+	</body>
+</html>

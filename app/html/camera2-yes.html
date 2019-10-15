@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Cameraless Video</title>
+	</head>
+	<body>
+		<script>
+			function submitVideo() {
+				window.open('/camera3', '_blank', 'height=230,width=250,top=100,left=200');	
+			}
+		</script>
+		<audio autoplay>
+		  <source src="/imgs/ding.wav" type="audio/wav">
+		  Your browser does not support the audio tag.
+		</audio>
+		<form onsubmit="submitVideo()" id="what-is-a-video">
+			<img src="https://media2.giphy.com/media/10hzAv962PpuP6/giphy.gif?cid=790b7611cf44368076284b8d47a9788e333bff2f5d0a35c6&rid=giphy.gif" style="width:100%;position:absolute;bottom:-200px;right:-100px;z-index:-99">
+			<h2>𝘸𝘩𝘢𝘵 𝘪𝘴 𝘢 𝘤𝘢𝘮𝘦𝘳𝘢? 𝘥𝘰𝘦𝘴 "𝘷𝘪𝘳𝘵𝘶𝘢𝘭𝘪𝘵𝘺" 𝘮𝘢𝘵𝘵𝘦𝘳?</h2>
+			<textarea style="width:300;height:150;" name="video1" form="what-is-a-video"></textarea>
+			<input type="submit">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Cameraless Video</title>
+	</head>
+	<body>
+		<script>	
+			function yes() {
+				window.open('/video2-yes', '_blank', 'height=150,width=300,top=150,left=350');	
+			}
+
+			function no() {
+				window.open('/video2-no', '_blank', 'height=500,width=150,top=100,left=200');	
+			}
+		</script>
+		<audio autoplay>
+		  <source src="/imgs/ding.wav" type="audio/wav">
+		  Your browser does not support the audio tag.
+		</audio>
+		<img src="https://media2.giphy.com/media/zsp6JrZQf3rPy/giphy.gif?cid=790b76118c79a14cd6b55a89344f971054eea5d29cfd845b&rid=giphy.gif" style="width:100%;position:absolute;z-index: -99">
+		<form onsubmit="submitVideo()" id="what-is-a-video">
+			<h2 style="font-size:48px">𝒾𝓈 𝓉𝒽𝑒 𝓅𝓁𝒶𝓎𝒷𝒶𝒸𝓀 𝒶 𝓋𝒾𝒹𝑒𝑜?</h2>
+			<input type="button" value="y" onclick="yes()">
+			<input type="button" value="n" onclick="no()">
+		</form>
+	</body>
+</html>
