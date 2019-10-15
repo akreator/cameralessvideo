@@ -32,6 +32,7 @@
     "react-dom": "^15.4.2",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-router-dom": "^4.0.0",
+    "sqlite3": "^4.1.0",
     "three": "^0.109.0",
     "webpack": "^2.3.2",
     "zlibjs": "^0.3.1"

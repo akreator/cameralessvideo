@@ -27,6 +27,8 @@ var isObjSelected = false;
 var backButton, descriptionText;
 var cameraOrigPosition;
 var zoomingOut = false;
+var clock, textMesh;
+var over = false;
 
 //var cameraForImage;
 
@@ -34,7 +36,6 @@ init();
 animate();
 
 function unselectObj() {
-	console.log('unselecting ' + SELECTED.name);
 	isObjSelected = false;
 	zoomingOut = true;
 	backButton.style.display = 'none';
@@ -53,6 +54,8 @@ function init() {
 	descriptionText.setAttribute('id', 'text');
 	descriptionText.style.display = 'none';
 	document.body.appendChild(descriptionText);
+
+	clock = new THREE.Clock(false);
 
 	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000 );
 	camera.position.set(150, 200, 370);	
@@ -110,6 +113,23 @@ function init() {
 		console.log(error);
 	});
 
+	var fontLoader = new THREE.FontLoader();
+	fontLoader.load('three/examples/fonts/helvetiker_bold.typeface.json', function( font ) {
+		var textGeometry = new THREE.TextGeometry( 'REC', {
+			font: font,
+			size: 5,
+			height: 5,
+			curveSegments: 12,
+			bevelEnabled: false,
+		} );
+		var textMaterial = new THREE.MeshPhongMaterial( { color: 0xff0000, flatShading: true });
+		textMesh = new THREE.Mesh(textGeometry, textMaterial);
+		textMesh.position.set(0, 165, -315);
+		textMesh.rotateY(Math.PI);
+		textMesh.visible = false;
+		scene.add(textMesh);
+	});
+
 	//renderer
 	renderer = new THREE.WebGLRenderer( { antialias : true } );
 	renderer.setPixelRatio(window.devicePixelRatio);
@@ -130,8 +150,10 @@ function init() {
 }
 
 function animate() {
-	requestAnimationFrame( animate );
-	render();
+	if (!over) {
+		requestAnimationFrame( animate );
+		render();
+	}
 }
 
 function onDocumentKeyDown( event ) {
@@ -139,13 +161,11 @@ function onDocumentKeyDown( event ) {
 
 	if (isObjSelected && SELECTED && SELECTED.name === 'camera') {
 		if (event.which == 32) {
-			console.log('RECORDING');
-			console.log(camera);
 			camera.position.set(0, 150, -400);
-			camera.lookAt(new THREE.Vector3(0, 0, 0));
-			//camera.updateProjectionMatrix();
-			controls.update();
-			console.log(camera);
+			camera.lookAt(nameLoc['camera']);
+			backButton.style.display = 'none';
+			descriptionText.style.display = 'none';
+			clock.start();
 		}
 	}
 }
@@ -161,7 +181,6 @@ function onDocumentMouseDown( event ) {
 		isObjSelected = true;
 		SELECTED = INTERSECTED;
 		
-		backButton.style.display = 'block'
 		
 		//return to normal color
 		if (INTERSECTED.name === "camera") {
@@ -175,7 +194,7 @@ function onDocumentMouseDown( event ) {
 	}
 }
 
-function moveCamera() {
+function moveCamera() { 
 	if (isObjSelected) {
 		controls.target = nameLoc[SELECTED.name];
 		var dist = new THREE.Vector3();
@@ -192,6 +211,7 @@ function moveCamera() {
 			controls.enableRotate = true;
 		 	descriptionText.style.display = 'block';
 			descriptionText.innerHTML = nameDescription[SELECTED.name];
+			backButton.style.display = 'block'
 		}
 	}
 }
@@ -277,15 +297,32 @@ function findIntersectingObject() {
 		}
 		INTERSECTED = null;
 	}
-
 }
 
 function render() {
 	if (!isObjSelected) {
 		findIntersectingObject();
 	}
-	moveCamera();
-	zoomOut();
+	if (!clock.running) {
+		moveCamera();
+		zoomOut();
+	} else {
+		if (clock.getElapsedTime() - Math.floor(clock.getElapsedTime()) <= 0.5){
+			textMesh.visible = true;
+		} else {
+			textMesh.visible = false;
+		}
+	}
+	
+	if (clock.getElapsedTime() >= 8) {
+		clock.stop();
+		over = true;
+		textMesh.visible = false;
+		descriptionText.innerHTML = "Done!";
+		descriptionText.style.display = 'block';
+		setTimeout( function() { window.location.replace("/playback"); },
+			3000);
+	}
 	renderer.render(scene, camera);
 }
 
